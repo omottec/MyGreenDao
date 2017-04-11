@@ -52,8 +52,8 @@ public abstract class AbsDbOpenHelper extends DatabaseOpenHelper {
     private void executeUpgrades(Database db, SortedMap<Integer, DbUpgrade> upgrades) {
         if (upgrades.isEmpty()) return;
         Collection<DbUpgrade> values = upgrades.values();
+        db.beginTransaction();
         try {
-            db.beginTransaction();
             for (DbUpgrade upgrade : values)
                 upgrade.onUpgrade(db);
             db.setTransactionSuccessful();
@@ -61,6 +61,7 @@ public abstract class AbsDbOpenHelper extends DatabaseOpenHelper {
             t.printStackTrace();
             dropAllTables(db, true);
             onCreate(db);
+            db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }

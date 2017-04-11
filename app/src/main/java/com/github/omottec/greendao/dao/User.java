@@ -17,10 +17,13 @@ public class User {
     @NotNull
     private String name;
 
-    @Generated(hash = 1709734220)
-    public User(Long id, @NotNull String name) {
+    private boolean female;
+
+    @Generated(hash = 1105066515)
+    public User(Long id, @NotNull String name, boolean female) {
         this.id = id;
         this.name = name;
+        this.female = female;
     }
 
     @Generated(hash = 586692638)
@@ -41,5 +44,17 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isFemale() {
+        return female;
+    }
+
+    public void setFemale(boolean female) {
+        this.female = female;
+    }
+
+    public boolean getFemale() {
+        return this.female;
     }
 }
